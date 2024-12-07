@@ -22,9 +22,13 @@ defmodule Day7 do
  end
 
  defp backtrack_2([hd | tl], target, result) do
-   backtrack_2(tl, target, result + hd) ||
-   backtrack_2(tl, target, result * hd) ||
-   backtrack_2(tl, target, Integer.to_string(result) <> Integer.to_string(hd) |> String.to_integer())
+    cond do
+      result > target -> false
+      true ->
+        backtrack_2(tl, target, result + hd) ||
+          backtrack_2(tl, target, result * hd) ||
+          backtrack_2(tl, target, Integer.to_string(result) <> Integer.to_string(hd) |> String.to_integer())
+    end
  end
 
   def part1(file_name) do
